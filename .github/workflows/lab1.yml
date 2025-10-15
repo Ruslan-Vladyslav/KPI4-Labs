@@ -1,0 +1,31 @@
+name: Lab1 Test
+
+on:
+  push:
+    paths:
+      - 'Lab1/**'
+  pull_request:
+    paths:
+      - 'Lab1/**'
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 9.0.x
+
+      - name: Restore dependencies
+        run: dotnet restore Lab1/ConwaysGameOfLife.sln
+
+      - name: Build solution
+        run: dotnet build Lab1/ConwaysGameOfLife.sln --configuration Release --no-restore
+
+      - name: Run tests
+        run: dotnet test Lab1/ConwaysGameOfLife.sln --no-build --verbosity normal
