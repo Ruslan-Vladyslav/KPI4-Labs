@@ -2,11 +2,11 @@ name: Lab1 Test
 
 on:
   push:
-    paths:
-      - 'Lab1/**'
+    branches:
+      - main
   pull_request:
-    paths:
-      - 'Lab1/**'
+    branches:
+      - main
 
 jobs:
   build-and-test:
@@ -28,4 +28,4 @@ jobs:
         run: dotnet build Lab1/ConwaysGameOfLife.sln --configuration Release --no-restore
 
       - name: Run tests
-        run: dotnet test Lab1/ConwaysGameOfLife.sln --no-build --verbosity normal
+        run: dotnet test Lab1/ConwaysGameOfLife.sln --verbosity normal
